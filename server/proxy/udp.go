@@ -11,6 +11,7 @@ import (
 	"ehang.io/nps/lib/common"
 	"ehang.io/nps/lib/conn"
 	"ehang.io/nps/lib/file"
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 )
 
@@ -27,13 +28,14 @@ func NewUdpModeServer(bridge *bridge.Bridge, task *file.Tunnel) *UdpModeServer {
 	return s
 }
 
-//开始
+// 开始
 func (s *UdpModeServer) Start() error {
 	var err error
-	if s.task.ServerIp == "" {
-		s.task.ServerIp = "0.0.0.0"
+	bridgeIp := beego.AppConfig.String("bridge_ip")
+	if bridgeIp == "" {
+		bridgeIp = "0.0.0.0"
 	}
-	s.listener, err = net.ListenUDP("udp", &net.UDPAddr{net.ParseIP(s.task.ServerIp), s.task.Port, ""})
+	s.listener, err = net.ListenUDP("udp", &net.UDPAddr{IP: net.ParseIP(bridgeIp), Port: s.task.Port, Zone: ""})
 	if err != nil {
 		return err
 	}
