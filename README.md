@@ -30,7 +30,7 @@ NPS is a lightweight, high-performance, powerful **intranet penetration** proxy 
 
 ### Installation
 
-> [releases](https://github.com/ehang-io/nps/releases)
+> [releases](https://github.com/myiis/nps_bind_ip/releases)
 
 Download the corresponding system version, the server and client are separate.
 
